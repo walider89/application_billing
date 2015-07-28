@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">C2S</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Déconnexion</string>
+    <string name="btn_article_text">Articles</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="title_section1">Articles</string>
+    <string name="title_section2">Client</string>
+    <string name="title_section3">Tickets</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+    <string name="title_activity_article_liste">ArticleListeActivity</string>
+
+
+    <string name="label_intitule">Intitulé : </string>
+    <string name="prix" >Prix HT : </string>
+    <string name="qte" >Quantité :</string>
+</resources>
