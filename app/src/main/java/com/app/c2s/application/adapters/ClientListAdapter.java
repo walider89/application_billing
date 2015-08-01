@@ -14,14 +14,14 @@ import com.app.c2s.application.adapters.item.ArticleListItem;
 import java.util.List;
 
 /**
- * This is article list adapter.
+ * Client model List adapter
  */
-public class ArticleListAdapter extends ArrayAdapter {
+public class ClientListAdapter extends ArrayAdapter {
 
     private Context context;
     private boolean useList = true;
 
-    public ArticleListAdapter(Context context, List items) {
+    public ClientListAdapter(Context context, List items) {
         super(context, android.R.layout.simple_list_item_1, items);
         this.context = context;
     }
@@ -31,8 +31,8 @@ public class ArticleListAdapter extends ArrayAdapter {
      */
     private class ViewHolder{
         TextView intitule;
-        TextView prix;
-        TextView qte;
+        TextView reglement;
+        TextView solde;
     }
 
     /**
@@ -53,15 +53,15 @@ public class ArticleListAdapter extends ArrayAdapter {
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
             if(useList){
-                viewToUse = mInflater.inflate(R.layout.article_list_item, null);
+                viewToUse = mInflater.inflate(R.layout.client_list_item, null);
             } else {
-                viewToUse = mInflater.inflate(R.layout.article_grid_item, null);
+                viewToUse = mInflater.inflate(R.layout.client_grid_item, null);
             }
 
             holder = new ViewHolder();
             holder.intitule = (TextView)viewToUse.findViewById(R.id.txt_article_intitule);
-            holder.prix = (TextView)viewToUse.findViewById(R.id.txt_article_prix);
-            holder.qte = (TextView)viewToUse.findViewById(R.id.txt_article_qte);
+            holder.reglement = (TextView)viewToUse.findViewById(R.id.txt_article_prix);
+            holder.solde = (TextView)viewToUse.findViewById(R.id.txt_article_qte);
             viewToUse.setTag(holder);
         } else {
             viewToUse = convertView;
@@ -69,8 +69,8 @@ public class ArticleListAdapter extends ArrayAdapter {
         }
 
         holder.intitule.setText(item.getIntitule());
-        holder.prix.setText(item.getPrix_ht()+"");
-        holder.qte.setText(item.getQuantite()+"");
+        holder.reglement.setText(item.getPrix_ht()+"");
+        holder.solde.setText(item.getQuantite()+"");
         return viewToUse;
     }
 }

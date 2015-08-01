@@ -5,27 +5,23 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import com.app.c2s.application.fragments.ArticleFragment;
-import com.app.c2s.application.fragments.Client_Fragment;
+import com.app.c2s.application.fragments.ClientFragment;
 import com.app.c2s.application.fragments.Ticket_Fragment;
 
 
  public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ArticleFragment.OnFragmentInteractionListener {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ArticleFragment.OnFragmentInteractionListener,
+                   ClientFragment.OnFragmentInteractionListener     {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -64,7 +60,7 @@ import com.app.c2s.application.fragments.Ticket_Fragment;
             case 1 :
                 fragment = new ArticleFragment();break;
             case 2 :
-                fragment =  new Client_Fragment();break;
+                fragment =  new ClientFragment();break;
             case 3 :
                 fragment =  new Ticket_Fragment();break;
 

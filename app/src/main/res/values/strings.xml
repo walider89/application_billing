@@ -19,4 +19,10 @@
     <string name="label_intitule">Intitulé : </string>
     <string name="prix" >Prix HT : </string>
     <string name="qte" >Quantité :</string>
+    <string name="txt_solde">Solde</string>
+    <string name="lbl_reglement">Réglement</string>
+    <string name="lbl_intitule">Intitulé</string>
+    <string name="article_layout_text_view">Article Laayout</string>
+    <string name="ticket_layout_text_view">Ticket Layout</string>
+    <string name="company_name">C 2 S</string>
 </resources>

@@ -1,7 +1,7 @@
 package com.app.c2s.application;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,8 +10,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.app.c2s.application.R;
 
-public class ArticleListeActivity extends ActionBarActivity {
+
+public class ClientListeActivity extends ActionBarActivity {
 
     ArrayAdapter<String> myAdapter;
     ListView listView;
@@ -20,11 +22,11 @@ public class ArticleListeActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_article_liste);
+        setContentView(R.layout.activity_client_liste);
 
 
 
-        listView = (ListView) findViewById(R.id.listview_article);
+        listView = (ListView) findViewById(R.id.listview_client);
         myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dataArray);
         listView.setAdapter(myAdapter);
         listView.setTextFilterEnabled(true);

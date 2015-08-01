@@ -2,8 +2,8 @@ package com.app.c2s.application.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,15 +14,16 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.app.c2s.application.R;
 import com.app.c2s.application.adapters.ArticleListAdapter;
+import com.app.c2s.application.adapters.ClientListAdapter;
 import com.app.c2s.application.adapters.item.ArticleListItem;
-import com.app.c2s.application.db.models.Article;
+import com.app.c2s.application.adapters.item.ClientListItem;
+import com.app.c2s.application.db.models.Client;
 import com.app.c2s.application.db.provider.ArticleProvider;
+import com.app.c2s.application.db.provider.ClientProvider;
 import com.app.c2s.application.dummy.DummyContent;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,7 +35,7 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class ArticleFragment extends Fragment implements AbsListView.OnItemClickListener {
+public class ClientFragment extends Fragment implements AbsListView.OnItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,7 +46,7 @@ public class ArticleFragment extends Fragment implements AbsListView.OnItemClick
     private String mParam1;
     private String mParam2;
 
-    private List articlesListItemList;
+    private List clientsListItemList;
 
     private OnFragmentInteractionListener mListener;
 
@@ -61,8 +62,8 @@ public class ArticleFragment extends Fragment implements AbsListView.OnItemClick
     private ListAdapter mAdapter;
 
     // TODO: Rename and change types of parameters
-    public static ArticleFragment newInstance(String param1, String param2) {
-        ArticleFragment fragment = new ArticleFragment();
+    public static ClientFragment newInstance(String param1, String param2) {
+        ClientFragment fragment = new ClientFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -74,23 +75,24 @@ public class ArticleFragment extends Fragment implements AbsListView.OnItemClick
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ArticleFragment() {
+    public ClientFragment() {
     }
 
     @Nullable
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("ArticleFragment", "ArticleFragment on Create");
+        Log.d("ClientFragment", "ClientFragment oncreate");
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        ArticleProvider articleProvider =  new ArticleProvider(
+        ClientProvider clientProvider =  new ClientProvider(
                                                 this.getActivity().getApplicationContext());
 
-        mAdapter = new ArticleListAdapter(getActivity(), articleProvider.getAllListArticlesItems());
+        clientProvider.addClient(new Client("C001", (float)12.00,(float)184.044,(float)457.01,(float)65.14));
+        mAdapter = new ClientListAdapter(getActivity(), clientProvider.getAllListClientItems());
 
     }
 
@@ -133,7 +135,7 @@ public class ArticleFragment extends Fragment implements AbsListView.OnItemClick
             // fragment is attached to one) that an item has been selected.
             mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
         }
-        ArticleListItem item = (ArticleListItem) this.articlesListItemList.get(position);
+        ClientListItem item = (ClientListItem) this.clientsListItemList.get(position);
         Toast.makeText(getActivity(), item.getIntitule() + " Clicked!"
                 , Toast.LENGTH_SHORT).show();
     }

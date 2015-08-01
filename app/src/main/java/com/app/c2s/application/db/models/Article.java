@@ -1,7 +1,7 @@
 package com.app.c2s.application.db.models;
 
 /**
- * Created by Nawel on 7/24/2015.
+ * This is class present Article table and data
  */
 public class Article {
 
