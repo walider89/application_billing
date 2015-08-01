@@ -2,6 +2,7 @@ package com.app.c2s.application.db.provider;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -16,10 +17,11 @@ import com.app.c2s.application.db.models.User;
 public class UserProvider extends SQLiteOpenHelper {
 
     // All Static variables
+    public static final String APP_SHARED_PREFERENCES = "app_prefs";
     // Contacts Table Columns names
-    private static final String KEY_ID = "id";
-    private static final String KEY_NOM = "nom";
-    private static final String KEY_PRENOM = "prenom";
+    public static final String KEY_ID = "id";
+    public static final String KEY_NOM = "nom";
+    public static final String KEY_PRENOM = "prenom";
     private static final String KEY_USER_NAME = "username";
     private static final String KEY_PASSWORD = "password";
     private static final String KEY_REGLEMENT = "reglement";
@@ -90,9 +92,19 @@ public class UserProvider extends SQLiteOpenHelper {
         return user;
     }
 
-    public boolean login(String username, String password){
+    public boolean login(String username, String password, Context context){
         if (username != "" && password != ""){
-            return this.getUser(username, password) != null;
+
+            User user = this.getUser(username, password);
+            if(user != null) {
+                SharedPreferences prefs = context.getSharedPreferences(APP_SHARED_PREFERENCES, context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt(KEY_ID, user.getId());
+                editor.putString(KEY_NOM, user.getNom());
+                editor.putString(KEY_PRENOM, user.getPrenom());
+                editor.commit();
+                return true;
+            }
         }
         return false;
     }

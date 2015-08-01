@@ -5,26 +5,21 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.app.c2s.application.db.provider.UserProvider;
 
@@ -40,6 +35,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
      */
     private UserLoginTask mAuthTask = null;
 
+    public static final String APP_SHARED_PREFERENCES = "app_prefs";
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
@@ -50,7 +46,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        SharedPreferences prefs = getSharedPreferences(APP_SHARED_PREFERENCES, MODE_PRIVATE);
+        if( prefs.getInt(UserProvider.KEY_ID, -1)!= -1 ){
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mEmailView.setText("login");
@@ -146,14 +146,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-
-    }
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> cursorLoader) {
-
-    }
+    public void onLoaderReset(Loader<Cursor> cursorLoader) {  }
 
 
 
@@ -186,9 +182,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             // create User provider Instance
             UserProvider userProvider=  UserProvider.getInstance(getApplicationContext());
             // Fetch if user  exist using login method
-            if( userProvider.login(mEmail, mPassword)){
+            if( userProvider.login(mEmail, mPassword, getApplicationContext())){
                 // TODO: sauvegarde les coordonnées à la base de doonées local et redirige vers la page des tickets
-
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }else {
